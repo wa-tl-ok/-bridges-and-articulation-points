@@ -21,8 +21,8 @@ using namespace std;
 
 vector<vector<int>> g;
 vector<int> vis;
-vector<int> high;
-vector<int> min_high_in_node;
+vector<int> height;
+vector<int> min_height_in_node;
 
 void DFS(int v, int p) {
     if (v == 0) {
@@ -40,18 +40,18 @@ void DFS(int v, int p) {
             continue;
         }
         DFS(u, v);
-        min_high_in_node[v] = min(min_high_in_node[v], min_high_in_node[u]);
+        min_height_in_node[v] = min(min_height_in_node[v], min_height_in_node[u]);
     }
     for (auto u : g[v]) {
         if (u != p) {
-            min_high_in_node[v] = min(min_high_in_node[v], high[u]);
+            min_height_in_node[v] = min(min_height_in_node[v], height[u]);
         }
     }
 }
 
 void dfs(int v, int p, int h) {
     vis[v] = true;
-    high[v] = h;
+    height[v] = h;
     for (auto u : g[v]) {
         if (u == p) {
             continue;
@@ -86,9 +86,9 @@ int main() {
         ind[u * 1000000 + v] = i + 1;
     }
 
-    high.resize(n);
+    height.resize(n);
     for (int i = 0; i < n; i++) {
-        high[i] = 0;
+        height[i] = 0;
     }
 
     vis.resize(n);
@@ -96,9 +96,9 @@ int main() {
         vis[i] = false;
     }
 
-    min_high_in_node.resize(n);
+    min_height_in_node.resize(n);
     for (int i = 0; i < n; i++) {
-        min_high_in_node[i] = (int)1e9;
+        min_height_in_node[i] = (int)1e9;
     }
 
     dfs(0, 0, 0);
@@ -112,11 +112,11 @@ int main() {
             int a = u;
             int b = v;
 
-            if (high[a] > high[b]) {
+            if (height[a] > height[b]) {
                 swap(a, b);
             }
 
-            if (min_high_in_node[b] > high[a]) {
+            if (min_height_in_node[b] > height[a]) {
                 if (a > b) {
                     swap(a, b);
                 }
