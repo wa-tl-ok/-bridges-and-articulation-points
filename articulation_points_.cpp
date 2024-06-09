@@ -127,7 +127,9 @@ int main() {
     }
     min_tin_in_node[0] = 0;
 
-    dfs(0, 0); DFS(0, 0);
+    dfs(0, 0); 
+    
+    DFS(0, 0);
 
     set<int> uniq(answer.begin(), answer.end());
     vector<int> answer(uniq.begin(), uniq.end()); 
